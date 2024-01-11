@@ -8,11 +8,18 @@ function add_normalize_CSS()
 
 add_action('wp_enqueue_scripts', 'add_normalize_CSS');
 
-// functions.php
+//functions.php registering header nav as Header Menu
 
-function theme_setup() {
+function theme_setup()
+{
   // Register 'header-menu' as a theme location
-  register_nav_menu('header-menu', 'Header Menu');
+  register_nav_menus(
+    array(
+      "header-menu" =>  __("Header Menu"),
+      "footer-menu" => __("Footer Menu"),
+      "footer-secondary-menu" => __("Footer Secondary Menu")
+    )
+  );
 }
 
 add_action('after_setup_theme', 'theme_setup');
@@ -79,37 +86,84 @@ function append_hello_to_custom_post_titles($title)
 }
 add_filter('the_title', 'append_hello_to_custom_post_titles');
 
-//function to change structure of menu using hooks
-// function modify_menu_structure($items, $menu, $args) {
-//   // Check if this is the primary menu (replace 'primary' with your menu location or theme location)
+//function to change structure of menu items using hooks
+
+function customize_menu_output($nav_menu, $args)
+{
+  //var_dump($nav_menu);
+
+  if ($args->theme_location == 'header-menu') {
+    $nav_menu = str_replace('<li', '<div', $nav_menu);
+    $nav_menu = str_replace('</li>', '</div>', $nav_menu);
+  }
+
+  return $nav_menu;
+}
+
+add_filter('wp_nav_menu', 'customize_menu_output', 10, 2);
+
+
+// function customize_menu_output($nav_menu, $args) {
 //   if ($args->theme_location == 'header-menu') {
-//       foreach ($items as &$item) {
-//           // Replace <li> with <div>
-//           // $item->classes[] = 'menu-item-div'; // Add a class for styling purposes
-//           // $item->menu_item_parent = ''; // Remove parent relationship
-//           // $item->type = 'div'; // Change the item type to 'div'
-//           echo"itemmmm";
-//       }
+//       $nav_menu = preg_replace('/<li/', '<div', $nav_menu);
+//       $nav_menu = preg_replace('/<\/li>/', '</div>', $nav_menu);
 //   }
 
-//   return $items;
+//   return $nav_menu;
+// }
+// add_filter('wp_nav_menu', 'customize_menu_output', 10, 2);
+
+
+//adding data attribute to link tag
+
+// function add_data_attribute_to_stylesheet($tag, $handle, $src)
+// {
+//   $style_ids = array();
+//   $style_ids[] = $handle;
+//   //  var_dump($style_ids) ;
+//   if($handle == "dashicons-css"){
+//   $tag = '<link rel="stylesheet" src="' . esc_url($src) . ' id ='. $handle .' data-hello-key="hello">';
+//   return $tag;
+// }
 // }
 
-// add_filter('wp_get_nav_menu_items', 'modify_menu_structure', 10, 3);
+// // add_filter('style_loader_tag', 'add_data_attribute_to_stylesheet', 10, 3);
 
+// //adding data attribute to script tag
 
-// add_filter( 'wp_nav_menu_items', 'prefix_add_div', 10, 2 );
+// add_filter('script_loader_tag', 'add_data_attribute_to_script', 10, 3);
 
-// function prefix_add_div( $items, $args ) {
-//     $items = '<div></div>' . $items . '<div></div>';
-//     return $items;
+// function add_data_attribute_to_script($tag, $handle, $src)
+// {
+//   $script_ids = array();
+//   $script_ids[] = $handle;
+//   //var_dump($script_ids) ;
+//   if($handle == "admin-bar"){
+//   $tag = '<script type="text/javascript" src="' . esc_url($src) .' id ='. $handle . ' data-hola-key="hola"></script>';
+//   return $tag;
+//   }
 // }
-
-add_filter( 'wp_nav_menu_objects', function( $items ) {
-  foreach ( $items as $item ) {
-    if (!$item->menu_item_parent) {
-       $item->title = '<div>' . $item->title . '</div>';
-    }
+/////////////////////////////////////////////////////
+function my_acf_load_field( $field ) {
+    
+  // make required
+  $field['required'] = true;
+  
+  
+  // customize instructions with icon
+  $field['instructions'] = '<i class="help" title="Instructions here"></i>';
+  
+  
+  // customize wrapper element
+  $field['wrapper']['id'] = 'my-custom-id';
+  $field['wrapper']['data-jsify'] = '123';
+  $field['wrapper']['title'] = 'Text here';
+  
+  
+  // return
+  return $field;
+  
 }
-return $items;
-});
+
+add_filter('acf/load_field/name=description', 'my_acf_load_field');
+?>

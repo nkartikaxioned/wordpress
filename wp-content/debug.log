@@ -1,0 +1,180 @@
+[09-Jan-2024 07:28:10 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:10 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:10 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:10 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:11 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:11 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:11 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:11 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:11 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:11 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:12 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:12 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:12 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:12 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:12 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:12 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:12 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:12 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:13 UTC] PHP Warning:  Undefined array key "alt" in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
+[09-Jan-2024 07:28:13 UTC] PHP Fatal error:  Uncaught TypeError: in_array(): Argument #2 ($haystack) must be of type array, null given in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php:257
+Stack trace:
+#0 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php(257): in_array()
+#1 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(324): add_data_attribute_to_stylesheet()
+#2 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/class-wp-hook.php(348): WP_Hook->apply_filters()
+#3 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/plugin.php(517): WP_Hook->do_action()
+#4 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(3052): do_action()
+#5 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/header.php(7): wp_head()
+#6 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(790): require_once('...')
+#7 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template.php(725): load_template()
+#8 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/general-template.php(48): locate_template()
+#9 /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/index.php(1): get_header()
+#10 /var/www/html/kartik/wordpressfolder/wordpress/wp-includes/template-loader.php(106): include('...')
+#11 /var/www/html/kartik/wordpressfolder/wordpress/wp-blog-header.php(19): require_once('...')
+#12 /var/www/html/kartik/wordpressfolder/wordpress/index.php(17): require('...')
+#13 {main}
+  thrown in /var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/functions.php on line 257
