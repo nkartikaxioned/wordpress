@@ -2,158 +2,162 @@
 /*
 Template Name: Home Template
 */
-get_header(); // Include the header template
+get_header(); 
 ?>
-<div id="primary" class="content-area">
-    <main id="main" class="site-main">
-        <section>
-            <h2>Home</h2>
-            <p>This is Home page</p>
-            <?php 
-            // store the value in variable and echo value on page
-            $title = get_field('sample_title');
-            echo '<h4>'.$title."</h4><br>";
-            var_dump($title);
-            echo '<br>'; 
-            // print output using the_title 
-            //the_field('description');
-            echo wp_kses_post(get_field('description'));
-            echo '<br>'; 
-            the_field('number_field');
-            //var_dump(get_field('number_field'));
-            // email
-            the_field('email');
-            echo antispambot(get_field('email'));
-            ?>
-            <!-- url -->
-            <a href="<?php echo esc_attr( get_field('shop_url') ); ?>"><?php echo esc_attr( get_field('shop_url') ); ?></a>
-            <!-- image -->
-            <?php $image = get_field('image'); 
-            $thumb= $image['url'];
-            var_dump(get_field('image'));
-            ?>
-            <figure><img src="<?php echo esc_url($image['url']); ?>" alt="img"></figure>
-            <?php 
-            //files
-            $filesupload = get_field('file_upload');
-            var_dump($filesupload);
-            ?>
-            <div>
-            <a href="<?php echo esc_html($filesupload['url']); ?>" >view File</a>
-            </div>
-            <!-- wysiwyg -->
-            <?php the_field('editor'); ?>
-            <!-- oEmbed -->
-            <div>
-            <?php 
-            //var_dump(get_field('oembed_youtube'));
-            echo get_field('oembed_youtube'); 
-            ?>
-            </div>
-            <!-- gallery -->
-            <?php 
-            $gallerys = get_field('custom_gallery'); 
-            $size = 'full'; // (thumbnail, medium, large, full or custom size)
-            var_dump($gallerys);
-            ?>
-           <?php if( $gallerys ): ?>
-    <ul>
-        <?php foreach( $gallerys as $gallery ): ?>
-            <li>
-                <a href="<?php echo esc_url($gallery['url']); ?>">
-                     <img src="<?php echo esc_url($gallery['sizes']['thumbnail']); ?>" alt="<?php echo esc_attr($gallery['alt']); ?>" />
-                </a>
-                <p><?php echo esc_html($gallery['caption']); ?></p>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?> 
-               <!-- select -->
-               <?php 
-               $select = get_field_object('select_custom');
-               var_dump($select['value']);
-               ?>
-             <?php  if( $select ): ?>
-               <p><?php echo $select['value']['label'] .'='. $select['value']['value']; ?></p>
-<?php endif; ?>
-              <!-- radio button -->
-              <?php var_dump(get_field_object('custom_radio'));
-              $radioo = get_field_object('custom_radio');
-              echo "<br>".$radioo['value']."<br>";
-
-              //true/ false
-              var_dump(get_field('truefalse'));
-              echo(get_field('truefalse'));
-              echo "<br>";
-              //link
-              echo 'link <br>';
-              var_dump(get_field('custom_link'));
-              echo "<br>";
-              // pagelink
-              var_dump(get_field_object('custom_page_link'));
-              echo"====pagelink====";
-              echo "<br>";
-              // pageobject
-              echo"///////////////////////////////+++++++++++";
-              var_dump(get_field_object('custom_post_object'));
-              echo"///////////////////////////////";
-              //relationship
-              var_dump(get_field_object('custom_relationship'));
-              ?>
-
-        </section>
-        <section class="content-area content-thin">
-    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-        <article class="article-loop">
-          <header>
-            <h2><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-            By: <?php the_author(); ?>
-          </header>
-        </article>
-      <?php endwhile;
-    else : ?>
-      <article>
-        <p>Sorry, no posts were found!</p>
-      </article>
-    <?php endif; ?>
-  </section>
-  <section>
-  <?php
-  $args = array(
-    'date_query' => array(
-       array(
-         'after' => '2024-01-02',
-       ),
-       array(
-          'before' => '2024-01-05',
-       ),
-       'relation' => 'AND'
-       //'compare' => 'BETWEEN',
-    ), 
-    'post_type' => 'books',
-    'title' => 'Hamlet',
-    'category_name' => 'book',
-    'tag' => 'book_hamlet',
-    'posts_per_page' => -1, // -1 to show all posts
-);
-
-$custom_query = new WP_Query($args);
-
-if ($custom_query->have_posts()) :
-    while ($custom_query->have_posts()) : $custom_query->the_post();
-        the_title('<h2>', '</h2>');
-        the_content();
-    endwhile;
-else :
-    echo '<p>No custom posts found.</p>';
-endif;
-
-// Reset Post Data
-wp_reset_postdata();
-?>
-  </section>
-    </main><!-- #main -->
-</div><!-- #primary -->
 <?php
-get_footer(); // Include the footer template
+$image = get_field('banner_image');
+?>
+<section class="banner">
+  <figure>
+    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_url($image['alt']); ?>">
+  </figure>
+  <ul>
+  <?php 
+  while( have_rows('cards') ) : the_row();
+  $sub_value = get_sub_field('icon');
+  $sub_value2 = get_sub_field('attendees');
+  // var_dump($sub_value);
+  // var_dump($sub_value2); ?>
+<li>
+  <figure><img src="<?php echo $sub_value; ?>" alt="img"></figure>
+  <p><?php echo $sub_value2; ?></p>
+</li>
+<?php endwhile; ?>
+  </ul>
+</section>
+<section>
+  <div class="wrapper">
+  <?php //var_dump(get_field('section_second')); 
+  $sectionSecond = get_field('section_second');
+  $imagesGallery = $sectionSecond[0]['images_gallery'];  
+  //var_dump(['title']);
+  ?>
+  <div>
+  <h2> <?php echo $sectionSecond[0]['title1']; ?> </h2>
+  <?php echo $sectionSecond[0]['text_area']; ?>
+  <p><?php echo $sectionSecond[0]['register']; ?></p>
+  <div>
+    <a href="<?php echo ['url'][0]; ?> " target="<?php echo ['target'][0];?>">Register</a>
+  </div>
+  </div>
+  <div>
+    <figure><img src="<?php echo esc_url($imagesGallery[0]); ?>" alt="image"></figure>
+    <figure><img src="<?php echo esc_url($imagesGallery[1]); ?>" alt="image"></figure>
+    <figure><img src="<?php echo esc_url($imagesGallery[2]); ?>" alt="image"></figure>
+  </div>
+  </div>
+</section>
+<section>
+  <div class="wrapper">
+    <ul>
+    <?php //var_dump(get_field_object('all_speakers')); 
+    $fieldSpeakers = get_field_object('all_speakers');
+    foreach( $fieldSpeakers['value'] as $featured_post ):
+    ?>
+    <li><?php echo $featured_post->post_content; ?></li>
+<?php endforeach; ?>
+</ul>
+  </div>
+</section>
+<section>
+  <div class="wrapper">
+    <h2><?php echo esc_html( get_field('section_thied_title') ); ?></h2>
+  <ul>
+  <?php 
+  while( have_rows('topics') ) : the_row();
+  $topic_value = get_sub_field('topic_image');
+  $topic_value2 = get_sub_field('topic_title');
+  $topic_value3 = get_sub_field('topic_link');
+  // var_dump($topic_value);
+  // var_dump($topic_value2);
+  // var_dump($topic_value3);
+   ?>
+<li>
+  <figure><img src="<?php echo $topic_value; ?>" alt="img"></figure>
+  <p><?php echo $topic_value2; ?></p>
+  <div>
+    <a href="<?php echo $topic_value3; ?>">Learn More</a>
+  </div>
+</li>
+<?php endwhile; ?>
+  </ul>
+  </div>
+  <div class="event-format">
+  <h2><?php echo esc_html( get_field('event_format') ); ?></h2>
+  <ul>
+  <?php 
+  while( have_rows('event_format_data') ) : the_row();
+  $eventFormat = get_sub_field('event_format_text');
+  //var_dump($eventFormat);
+   ?>
+<li>
+  <p><?php echo $eventFormat; ?></p>
+</li>
+<?php endwhile; ?>
+  </ul>
+  </div>
+  <div class="inperson-venu">
+    <?php //var_dump(get_field('in_person_venu_field')); 
+    $inpersonMenu=get_field('in_person_venu_field');
+    ?>
+    <?php echo $inpersonMenu[0]['in_person_venu_text']; ?>
+    <div>
+      <a href="<?php echo $inpersonMenu[0]['plan_your_visit']; ?>">plan your visit</a>
+    </div>
+  </div>
+  <div>
+    <?php //var_dump(get_field('why_attend_container')); 
+     $whyAttend = get_field('why_attend_container');
+    ?>
+    <h2><?php echo $whyAttend[0]['title_why_attend']; ?></h2>
+    <ul>
+    <?php
+    foreach ($whyAttend[0]['attend'] as $attend_item) :
+      $attend_image = $attend_item['attend_image'];
+      $attend_txt_content = $attend_item['attend_txt_content'];
+      $meet_our_sponsers = $attend_item['meet_our_sponsers'];
+  ?>
+      <img src="<?php echo $attend_image; ?>" alt="image">
+      <?php echo $attend_txt_content; ?>
+      <div>
+        <a href="<?php echo $meet_our_sponsers; ?>">Meet Our Sponsers</a>
+      </div>
+<?php endforeach; ?>
+  </ul>
+  </div>
+</section>
+<section>
+  <div class="wrapper">
+    <?php //var_dump(get_field('attendees_said')); 
+    $atteneesSaid = get_field('attendees_said');?>
+  <h2><?php echo esc_html( $atteneesSaid[0]['what_attendees_said_title']); ?></h2>
+  <?php //var_dump($atteneesSaid[0]['content_repeater'][1]['content_editor_']);?>
+  <?php 
+   foreach ($atteneesSaid[0]['content_repeater'] as $content_item):
+    $content_editor_value = $content_item['content_editor_']; 
+    ?>
+    <p> <?php echo $content_editor_value; ?> </p>
+   <?php endforeach; ?>
+  </div>
+</section>
+<section>
+  <div class="wrapper">
+    <?php //var_dump(get_field('intrested_in_speaking_container')); 
+    $sectionintersted = get_field('intrested_in_speaking_container');
+    ?>
+    <div>
+      <h2><?php echo $sectionintersted[0]['container_title']; ?></h2>
+      <p><?php echo $sectionintersted[0]['container_text_content']; ?></p>
+      <a href="mailto:<?php echo $sectionintersted[0]['email_content']; ?>"><?php echo $sectionintersted[0]['email_content']; ?></a>
+      <div>
+        <a href="<?php echo $sectionintersted[0]['become_a_speaker_link']; ?>">Become a Speaker</a>
+      </div>
+    </div>
+    <div>
+      <img src="<?php echo $sectionintersted[0]['image_content_']; ?>" alt="image">
+    </div>
+  </div>
+</section>
+<?php
+get_footer(); 
 ?>
