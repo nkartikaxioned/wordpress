@@ -1,9 +1,11 @@
 <?php
+
 // This function enqueues the Normalize.css for use. The first parameter is a name for the stylesheet, the second is the URL. Here we
 // use an online version of the css file.
 function add_normalize_CSS()
 {
   wp_enqueue_style('normalize-styles', "https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
+  wp_enqueue_style('theme-style', get_stylesheet_uri(), array(), filemtime(get_stylesheet_directory() . '/style.css'));
 }
 
 add_action('wp_enqueue_scripts', 'add_normalize_CSS');
@@ -185,27 +187,13 @@ add_filter('wp_nav_menu', 'customize_menu_output', 10, 2);
 //   return $tag;
 //   }
 // }
-/////////////////////////////////////////////////////
-function my_acf_load_field( $field ) {
-    
-  // make required
-  $field['required'] = true;
-  
-  
-  // customize instructions with icon
-  $field['instructions'] = '<i class="help" title="Instructions here"></i>';
-  
-  
-  // customize wrapper element
-  $field['wrapper']['id'] = 'my-custom-id';
-  $field['wrapper']['data-jsify'] = '123';
-  $field['wrapper']['title'] = 'Text here';
-  
-  
-  // return
-  return $field;
-  
-}
 
-add_filter('acf/load_field/name=description', 'my_acf_load_field');
+//function to remove default wysiwyg editor and add media button (editor access)
+// function remove_wysiwyg_editor() {
+//   remove_post_type_support('post', 'editor');
+//   remove_post_type_support('page', 'editor');
+// }
+
+// add_action('init', 'remove_wysiwyg_editor');
+
 ?>
