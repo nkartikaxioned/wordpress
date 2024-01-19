@@ -91,7 +91,7 @@ function custom_post_type_speakers()
     'label'                 => __('speaker', 'text_domain'),
     'description'           => __('speakers custom post type', 'text_domain'),
     'labels'                => $labels,
-    'supports'              => array('title', 'editor', 'thumbnail', 'categories', 'tags'),
+    'supports'              => array('title','editor','excerpt','trackbacks','custom-fields','comments','revisions','thumbnail','author','page-attributes'),
     'hierarchical'          => false,
     'public'                => true,
     'show_ui'               => true,
@@ -195,5 +195,3 @@ add_filter('wp_nav_menu', 'customize_menu_output', 10, 2);
 // }
 
 // add_action('init', 'remove_wysiwyg_editor');
-
-?>
