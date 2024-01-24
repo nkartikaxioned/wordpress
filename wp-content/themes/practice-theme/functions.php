@@ -91,7 +91,7 @@ function custom_post_type_speakers()
     'label'                 => __('speaker', 'text_domain'),
     'description'           => __('speakers custom post type', 'text_domain'),
     'labels'                => $labels,
-    'supports'              => array('title','editor','excerpt','trackbacks','custom-fields','comments','revisions','thumbnail','author','page-attributes'),
+    'supports'              => array('title','editor','excerpt','trackbacks','custom-fields','comments','revisions','thumbnail','author','page-attributes','post-thumbnails'),
     'hierarchical'          => false,
     'public'                => true,
     'show_ui'               => true,
@@ -111,6 +111,31 @@ function custom_post_type_speakers()
 }
 add_action('init', 'custom_post_type_speakers', 0);
 
+//function to add thumbnail to post
+add_theme_support( 'post-thumbnails' );
+
+//function to load/register google maps api
+function my_acf_google_map_api( $api ){
+  $api['key'] = 'AIzaSyB994u85dM3OYGVa60AD6foZTTouQczgAc';
+  return $api;
+}
+add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
+
+//function to add options page 
+if( function_exists('acf_add_options_page') ) {
+  acf_add_options_page(array(
+      'page_title' => 'Website Settings',
+      'menu_title' => 'Website Settings',
+      'menu_slug'  => 'website-settings',
+      'capability' => 'edit_posts',
+      'icon_url'   => 'dashicons-admin-generic',
+  ));
+}
+
+// function my_acf_init() {
+//   acf_update_setting('google_api_key', 'AIzaSyB994u85dM3OYGVa60AD6foZTTouQczgAc');
+// }
+// add_action('acf/init', 'my_acf_init');
 //hooks practice
 //printing hello all once page is loaded
 // function sayHello( $id ) {

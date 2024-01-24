@@ -6,9 +6,11 @@ Template Name: Speaker Listing Template
 <?php
 //397
 $featured_posts = get_field('speakers_list');
+// var_dump($featured_posts);
 if ($featured_posts) { ?>
   <article class="speaker-card">
     <?php foreach ($featured_posts as $featured_post) {
+      //var_dump($featured_post);
       $permalink = get_permalink($featured_post->ID);
       $post_id = $featured_post->ID;
       $speakerImage = get_field('speaker_image', $post_id);
@@ -26,6 +28,10 @@ if ($featured_posts) { ?>
       $post_link = isset($post_link) ? $post_link : '#FIXME';
     ?>
       <a href="<?php echo $post_link; ?>">
+      <?php $feat_image = wp_get_attachment_url( get_post_thumbnail_id($post_id)); 
+      $resized_thumbnail = wp_get_attachment_image(get_post_thumbnail_id($post_id), $size);
+      var_dump($resized_thumbnail);?>
+       <?php echo $resized_thumbnail; ?>
         <?php if (!empty($resizedSpeakerImage)) { ?>
           <figure class="speaker-image"><?php echo $resizedSpeakerImage; ?></figure>
         <?php } ?>

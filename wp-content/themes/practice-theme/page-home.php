@@ -69,4 +69,5 @@ if (have_rows('home_page')) {
     endif;
   endwhile;
 }
+get_footer();
 ?>
