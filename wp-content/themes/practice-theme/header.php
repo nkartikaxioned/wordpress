@@ -13,7 +13,7 @@
   </header> -->
   <?php //wp_nav_menu(array('theme_location' => 'header-menu')); 
   $site_logo = get_field('site_logo', 'option');
-  if(!empty($site_logo)){ ?>
+  if($site_logo){ ?>
   <figure class="site-logo"><img src="<?php echo $site_logo['url']; ?>" alt="<?php echo $site_logo['alt']; ?>"></figure>
   <?php }
   ?>

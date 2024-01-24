@@ -4,9 +4,11 @@
       <!-- <p>Copyright &copy; 2024</p> -->
     </footer>
     <?php 
-     $site_logo = get_field('site_logo', 'option');
-     if(!empty($site_logo)){ ?>
-     <figure class="site-logo"><img src="<?php echo $site_logo['url']; ?>" alt="<?php echo $site_logo['alt']; ?>"></figure>
+     $copy_right = get_field('copyright_text', 'option');
+     if($copy_right){ ?>
+     <div class="copy-right">
+     <p><?php echo $copy_right; ?></p>
+     </div>
      <?php }
     ?>
     <?php wp_footer(); ?>

@@ -50,7 +50,7 @@ function custom_post_type_books()
     'description'           => __('Books custom post type', 'text_domain'),
     'labels'                => $labels,
     'supports'              => array('title', 'editor', 'thumbnail', 'categories', 'tags'),
-    'hierarchical'          => false,
+    'hierarchical'          => true,
     'public'                => true,
     'show_ui'               => true,
     'show_in_menu'          => true,
@@ -91,8 +91,8 @@ function custom_post_type_speakers()
     'label'                 => __('speaker', 'text_domain'),
     'description'           => __('speakers custom post type', 'text_domain'),
     'labels'                => $labels,
-    'supports'              => array('title','editor','excerpt','trackbacks','custom-fields','comments','revisions','thumbnail','author','page-attributes','post-thumbnails'),
-    'hierarchical'          => false,
+    'supports'              => array('title', 'editor', 'excerpt', 'trackbacks', 'custom-fields', 'comments', 'revisions', 'thumbnail', 'author', 'page-attributes', 'post-thumbnails'),
+    'hierarchical'          => true,
     'public'                => true,
     'show_ui'               => true,
     'show_in_menu'          => true,
@@ -112,23 +112,48 @@ function custom_post_type_speakers()
 add_action('init', 'custom_post_type_speakers', 0);
 
 //function to add thumbnail to post
-add_theme_support( 'post-thumbnails' );
+add_theme_support('post-thumbnails');
 
 //function to load/register google maps api
-function my_acf_google_map_api( $api ){
+function my_acf_google_map_api($api)
+{
   $api['key'] = 'AIzaSyB994u85dM3OYGVa60AD6foZTTouQczgAc';
   return $api;
 }
 add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
 
 //function to add options page 
-if( function_exists('acf_add_options_page') ) {
-  acf_add_options_page(array(
-      'page_title' => 'Website Settings',
-      'menu_title' => 'Website Settings',
-      'menu_slug'  => 'website-settings',
-      'capability' => 'edit_posts',
-      'icon_url'   => 'dashicons-admin-generic',
+// if( function_exists('acf_add_options_page') ) {
+//   acf_add_options_page(array(
+//       'page_title' => 'Website Settings',
+//       'menu_title' => 'Website Settings',
+//       'menu_slug'  => 'website-settings',
+//       'capability' => 'edit_posts',
+//       'icon_url'   => 'dashicons-art',
+//   ));
+// }
+
+add_action('acf/init', 'my_acf_op_init');
+function my_acf_op_init()
+{
+
+  $parent = acf_add_options_page(array(
+    // 'page_title'  => __('Website Settings'),
+    'menu_title'  => __('Website Settings'),
+    'redirect'    => true,
+  ));
+
+  // Add sub page.
+  $child = acf_add_options_page(array(
+    'page_title'  => __('Header Settings'),
+    'menu_title'  => __('Header'),
+    'parent_slug' => $parent['menu_slug'],
+  ));
+
+  $child = acf_add_options_page(array(
+    'page_title'  => __('Footer Settings'),
+    'menu_title'  => __('Footer'),
+    'parent_slug' => $parent['menu_slug'],
   ));
 }
 
