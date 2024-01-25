@@ -1,11 +1,6 @@
 <?php
-
-// Get the post ID from the URL parameter
-// $post_id = isset($_GET['post_id']) ? intval($_GET['post_id']) : 0;
-$post_id = url_to_postid(get_permalink());
-// Get post data
 $post = get_post($post_id);
-if ($post_id) {
+if ($post) {
    $post_title = $post->post_title;
   $speaker_image = $post->speaker_image;
   $speaker_image_url = wp_get_attachment_image_src($speaker_image, 'medium');
