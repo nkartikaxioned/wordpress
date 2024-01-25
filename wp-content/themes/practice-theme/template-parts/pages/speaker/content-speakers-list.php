@@ -1,4 +1,7 @@
-<article class="speaker-card">
+<?php
+$featured_posts = get_field('speakers_list');
+if ($featured_posts) { ?>
+  <article class="speaker-card">
     <?php foreach ($featured_posts as $featured_post) {
       $post_id = $featured_post->ID;
       $permalink = get_permalink($post_id);
@@ -29,3 +32,4 @@
       </a>
     <?php } ?>
   </article>
+<?php } ?>

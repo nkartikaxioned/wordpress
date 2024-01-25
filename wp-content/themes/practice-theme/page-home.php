@@ -2,7 +2,6 @@
 /*
 Template Name: Home Template
 */
-require_once('/var/www/html/kartik/wordpressfolder/wordpress/wp-content/themes/practice-theme/custom-function.php');
 get_header();
 ?>
 <section class="banner-section">
@@ -31,43 +30,35 @@ get_header();
 </section>
 <?php
 if (have_rows('home_page')) {
-  $data = get_field('home_page');
-  while (have_rows('home_page')) : the_row();
-    if (get_row_layout() == 'four_cards_') :
-      $cards = get_sub_field('cards');
-      fourCardsSection($cards);
-?>
-    <?php
-    elseif (get_row_layout() == 'fifty_fifty_section') :
-      $sectionTwoByTwo = get_field('fifty_fifty_section');
-      twoByTwoSection($sectionTwoByTwo);
-    ?>
-    <?php
-    elseif (get_row_layout() == 'featured_speakers') :
-      featuredSpeakerSection();
-    ?>
-    <?php
-    elseif (get_row_layout() == 'topic_discussed_section') :
-      topicsDiscussedSection();
-    ?>
-    <?php elseif (get_row_layout() == 'event_format') : 
-    $events = get_sub_field('multiple_events');
-      eventFormatAndInPersonVenueSection($events);
-      ?>
-    <?php elseif (get_row_layout() == 'why_attend_section') : 
-      $attendSections = get_sub_field('attend_sections');
-      whyAttendSection($attendSections);
-      ?>
-    <?php elseif (get_row_layout() == 'what_our_attendees_said_section') : 
-      $topicsContainer = get_sub_field('topics_container');
-      whatOurAttendeesSaidSection($topicsContainer);
-      ?>
-    <?php elseif (get_row_layout() == 'intrested_in_speaking_section') : 
-      intrestedInSpeakingSection();
-      ?>
-<?php
-    endif;
-  endwhile;
+  while (have_rows('home_page')) {
+    the_row();
+    switch (get_row_layout()) {
+      case 'four_cards_':
+        get_template_part('template-parts/pages/home/content','four-cards');
+        break;
+      case 'fifty_fifty_section':
+        get_template_part('template-parts/pages/home/content','two-column');
+        break;
+      case 'featured_speakers':
+        get_template_part('template-parts/pages/home/content','featured-speakers');
+        break;
+      case 'topic_discussed_section':
+        get_template_part('template-parts/pages/home/content','topics-discussed');
+        break;
+      case 'event_format':
+        get_template_part('template-parts/pages/home/content','event-format');
+        break;
+      case 'why_attend_section':
+        get_template_part('template-parts/pages/home/content','why-attend');
+        break;
+      case 'what_our_attendees_said_section':
+        get_template_part('template-parts/pages/home/content','attendees-feedback');
+        break;
+      case 'intrested_in_speaking_section':
+        get_template_part('template-parts/pages/home/content','intrested');
+        break;
+    }
+  }
 }
 get_footer();
 ?>
