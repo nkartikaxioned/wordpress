@@ -9,6 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 * {
     box-sizing: border-box;
+    margin: 0 auto;
   }
   
   body {
@@ -16,4 +17,19 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
       font-family: Helvetica;
   }
 
-  
+/* speakers-list page style */
+.speakers-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.speaker-container {
+    border: 1px solid #000;
+    margin-top: 20px;
+   flex-basis: 30%;
+   text-align: center;
+}
+
+#load-more-container {
+    margin-top: 10px;
+}

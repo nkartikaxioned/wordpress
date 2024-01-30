@@ -157,6 +157,187 @@ function my_acf_op_init()
   ));
 }
 
+
+function enqueue_custom_script()
+{
+  wp_enqueue_script('jquery');
+  wp_enqueue_script('custom-ajax-script', get_template_directory_uri() . '/js/custom-ajax.js', array('jquery'), null, true);
+  wp_localize_script('custom-ajax-script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+}
+
+add_action('wp_enqueue_scripts', 'enqueue_custom_script');
+
+function get_posts_data_callback()
+{
+  $current_speaker_count = $_POST['current_speaker_count'];
+  $args = array(
+    'post_type' => 'speakers',
+    'posts_per_page' => 3,
+    'offset'         => $current_speaker_count,
+  );
+  $query = new WP_Query($args);
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+      $post_id = $query->ID;
+      $permalink = get_permalink($post_id);
+      $speakerImage = get_field('speaker_image', $post_id);
+      $companyLogo = get_field('company_logo', $post_id);
+      $speakerName = get_field('speaker_name', $post_id);
+      $speakerDesignation = get_field('speaker_designation_and_company', $post_id);
+      $size = 'medium';
+      $logoSize = 'thumbnail';
+      $logoImage = $companyLogo['ID'];
+      $resizedLogoImage = wp_get_attachment_image($logoImage, $logoSize);
+      $resized_thumbnail = wp_get_attachment_image(get_post_thumbnail_id($post_id), $size);
+?>
+      <article class="speaker-container">
+        <a href="<?php echo $permalink; ?>">
+          <?php
+          if ($resized_thumbnail) { ?>
+            <figure class="speaker-image"><?php echo $resized_thumbnail; ?></figure>
+          <?php }
+          if ($resizedLogoImage) { ?>
+            <figure class="company-logo"><?php echo $resizedLogoImage; ?></figure>
+          <?php }
+          if ($speakerName) { ?>
+            <h4 class="speaker-name"><?php echo $speakerName; ?></h4>
+          <?php }
+          if ($speakerDesignation) { ?>
+            <p class="speaker-designation"><?php echo $speakerDesignation; ?></p>
+          <?php } ?>
+        </a>
+      </article>
+    <?php
+    }
+  }
+  wp_die(); // Always include wp_die() to end the script
+}
+
+add_action('wp_ajax_get_posts_data', 'get_posts_data_callback');
+add_action('wp_ajax_nopriv_get_posts_data', 'get_posts_data_callback'); // For non-logged in users
+
+
+function get_speaker_data_callback()
+{
+  $taxonomies_names = $_POST['speaker_names'];
+
+  $args = array(
+    'post_type' => 'speakers',
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'category',
+        'field' => 'slug',
+        'terms' => $taxonomies_names,
+           'compare'  => 'IN',
+      ),
+    ),
+  );
+
+  $query = new WP_Query($args);
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+      $post_id = $query->ID;
+      $permalink = get_permalink($post_id);
+      $companyLogo = get_field('company_logo', $post_id);
+      $speakerName = get_field('speaker_name', $post_id);
+      $speakerDesignation = get_field('speaker_designation_and_company', $post_id);
+      $size = 'medium';
+      $logoSize = 'thumbnail';
+      $logoImage = $companyLogo['ID'];
+      $resizedLogoImage = wp_get_attachment_image($logoImage, $logoSize);
+      $resized_thumbnail = wp_get_attachment_image(get_post_thumbnail_id($post_id), $size);
+    ?>
+      <article class="speaker-container">
+        <a href="<?php echo $permalink; ?>">
+          <h3><?php echo get_the_title(); ?></h3>
+          <?php
+          if ($resized_thumbnail) { ?>
+            <figure class="speaker-image"><?php echo $resized_thumbnail; ?></figure>
+          <?php }
+          if ($resizedLogoImage) { ?>
+            <figure class="company-logo"><?php echo $resizedLogoImage; ?></figure>
+          <?php }
+          if ($speakerName) { ?>
+            <h4 class="speaker-name"><?php echo $speakerName; ?></h4>
+          <?php }
+          if ($speakerDesignation) { ?>
+            <p class="speaker-designation"><?php echo $speakerDesignation; ?></p>
+          <?php } ?>
+        </a>
+      </article>
+<?php
+    }
+  }
+  wp_die(); // Always include wp_die() to end the script
+  wp_reset_postdata();
+}
+
+add_action('wp_ajax_get_speaker_data', 'get_speaker_data_callback');
+add_action('wp_ajax_nopriv_get_speaker_data', 'get_speaker_data_callback'); // For non-logged in users
+
+function get_speaker_callback()
+{
+  $speaker_name = $_POST['speaker_name'];
+
+  $args = array(
+    'post_type'      => 'speakers',
+    'posts_per_page' => -1,
+    'meta_query'    => array(
+      'relation'      => 'AND',
+      array(
+        'key'       => 'speaker_name',
+        'value'     => $speaker_name,
+        'compare'   => 'IN',
+    ),
+  ),
+  );
+
+
+  $query = new WP_Query($args);
+  var_dump($query);
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+      $post_id = $query->ID;
+      $permalink = get_permalink($post_id);
+      $companyLogo = get_field('company_logo', $post_id);
+      $speakerName = get_field('speaker_name', $post_id);
+      $speakerDesignation = get_field('speaker_designation_and_company', $post_id);
+      $size = 'medium';
+      $logoSize = 'thumbnail';
+      $logoImage = $companyLogo['ID'];
+      $resizedLogoImage = wp_get_attachment_image($logoImage, $logoSize);
+      $resized_thumbnail = wp_get_attachment_image(get_post_thumbnail_id($post_id), $size);
+    ?>
+      <article class="speaker-container">
+        <a href="<?php echo $permalink; ?>">
+          <h3><?php echo get_the_title(); ?></h3>
+          <?php
+          if ($resized_thumbnail) { ?>
+            <figure class="speaker-image"><?php echo $resized_thumbnail; ?></figure>
+          <?php }
+          if ($resizedLogoImage) { ?>
+            <figure class="company-logo"><?php echo $resizedLogoImage; ?></figure>
+          <?php }
+          if ($speakerName) { ?>
+            <h4 class="speaker-name"><?php echo $speakerName; ?></h4>
+          <?php }
+          if ($speakerDesignation) { ?>
+            <p class="speaker-designation"><?php echo $speakerDesignation; ?></p>
+          <?php } ?>
+        </a>
+      </article>
+<?php
+    }
+  }
+  wp_die(); // Always include wp_die() to end the script
+}
+
+add_action('wp_ajax_get_speaker', 'get_speaker_callback');
+add_action('wp_ajax_nopriv_get_speaker', 'get_speaker_callback');
+
 // function my_acf_init() {
 //   acf_update_setting('google_api_key', 'AIzaSyB994u85dM3OYGVa60AD6foZTTouQczgAc');
 // }
@@ -169,32 +350,32 @@ function my_acf_op_init()
 // add_action( 'init', 'sayHello', 10 , 2 );
 
 ///function and hooks to append hello to title of specific post
-function append_hello_to_custom_post_titles($title)
-{
-  // Check if we are on a custom post type
-  if ('books' === get_post_type()) {
-    // Append "Hello" to the title
-    $title .= ' -- Hello --';
-  }
-  return $title;
-}
-add_filter('the_title', 'append_hello_to_custom_post_titles');
+// function append_hello_to_custom_post_titles($title)
+// {
+//   // Check if we are on a custom post type
+//   if ('books' === get_post_type()) {
+//     // Append "Hello" to the title
+//     $title .= ' -- Hello --';
+//   }
+//   return $title;
+// }
+// add_filter('the_title', 'append_hello_to_custom_post_titles');
 
 //function to change structure of menu items using hooks
 
-function customize_menu_output($nav_menu, $args)
-{
-  //var_dump($nav_menu);
+// function customize_menu_output($nav_menu, $args)
+// {
+//   //var_dump($nav_menu);
 
-  if ($args->theme_location == 'header-menu') {
-    $nav_menu = str_replace('<li', '<div', $nav_menu);
-    $nav_menu = str_replace('</li>', '</div>', $nav_menu);
-  }
+//   if ($args->theme_location == 'header-menu') {
+//     $nav_menu = str_replace('<li', '<div', $nav_menu);
+//     $nav_menu = str_replace('</li>', '</div>', $nav_menu);
+//   }
 
-  return $nav_menu;
-}
+//   return $nav_menu;
+// }
 
-add_filter('wp_nav_menu', 'customize_menu_output', 10, 2);
+// add_filter('wp_nav_menu', 'customize_menu_output', 10, 2);
 
 
 // function customize_menu_output($nav_menu, $args) {
