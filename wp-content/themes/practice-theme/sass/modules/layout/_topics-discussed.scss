@@ -1,0 +1,23 @@
+.discussed-topics {
+    padding: 30px 0;
+    .discussed-topics-heading { margin-bottom: 20px }
+    .topics-list { 
+        @include flex(); 
+        flex-wrap: wrap;
+
+        li {
+            margin: 10px;
+             @include basis(30%); 
+             position: relative;
+            }
+    }
+
+    .topic-title { @include fontSize($size: 25px, $weight: 600, $family: null); }
+    .text-content { 
+        position: absolute;
+        bottom: 9%;
+        transform: translate(0,-9%);
+     }
+
+     .topic-title,.topic-link-container a { color: map-get($map: $colors, $key: blackColor); }
+}

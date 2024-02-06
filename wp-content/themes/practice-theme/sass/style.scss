@@ -1,0 +1,21 @@
+//mixin import
+@import "default/mixins";
+@import "default/variable";
+@import "default/reset";
+@import "default/global";
+
+//sections import
+@import "modules/header/_header.scss";
+@import "modules/layout/_banner-section.scss";
+@import "modules/layout/_four-cards.scss";
+@import "modules/layout/_two-column.scss";
+@import "modules/layout/_featured-speakers.scss";
+@import "modules/layout/_topics-discussed.scss";
+@import "modules/layout/_event-format.scss";
+@import "modules/layout/_why-attend.scss";
+@import "modules/layout/_attendees-feedback.scss";
+@import "modules/layout/_intrested.scss";
+@import "modules/footer/_footer.scss";
+
+//speaker listing page styling
+@import "pages/speaker listing/_speaker-listing.scss";

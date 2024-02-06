@@ -6,12 +6,15 @@ get_header();
 ?>
 <section class="banner-section">
   <?php if ($bannerImage = get_field('banner_image')) : ?>
-    <figure><img class="banner-image" src="<?php echo $bannerImage['url']; ?>" alt="<?php echo $bannerImage['alt']; ?>"></figure>
+    <figure>
+      <img class="banner-image" src="<?php echo $bannerImage['url']; ?>" alt="<?php echo $bannerImage['alt']; ?>">
+    </figure>
   <?php endif; ?>
   <div class="wrapper">
     <?php if ($mainHeading = get_field('banner_main_heading')) : ?>
       <h2 class="banner-main-heading heading"><?php echo $mainHeading; ?></h2>
     <?php endif; ?>
+    <div class="sustainable-container">
     <?php if ($sustainingHeading = get_field('sustaining_planet_heading')) : ?>
       <h3 class="sustaining-planet-heading heading"><?php echo $sustainingHeading; ?></h3>
     <?php endif; ?>
@@ -19,13 +22,14 @@ get_header();
       <p><?php echo $shortDescription; ?></p>
     <?php endif; ?>
     <?php if ($timeLocation = get_field('sustaining_planet_time_and_location')) : ?>
-      <p><?php echo $timeLocation; ?></p>
+      <p class="time-location"><?php echo $timeLocation; ?></p>
     <?php endif; ?>
     <?php if ($readMoreLink = get_field('read_more_link_to_sustaining_planet')) : ?>
       <div class="read-more-link-container">
         <a href="<?php echo $readMoreLink['url']; ?>" target="<?php echo $readMoreLink['target']; ?>"><?php echo $readMoreLink['title']; ?></a>
       </div>
     <?php endif; ?>
+    </div>
   </div>
 </section>
 <?php

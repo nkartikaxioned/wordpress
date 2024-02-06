@@ -17,14 +17,18 @@
           <?php if (!empty($attendsection)) : ?>
             <li>
               <?php if (!empty($attendSectionImage)) : ?>
-                <img class="attend-image" src="<?php echo $attendSectionImage['url']; ?>" alt="<?php echo $attendSectionImage['alt']; ?>">
+                <figure>
+                  <img class="attend-image" src="<?php echo $attendSectionImage['url']; ?>" alt="<?php echo $attendSectionImage['alt']; ?>">
+                </figure>
               <?php endif; ?>
+              <div class="attendees-topic">
               <?php if (!empty($attendsection['attend_section_title'])) : ?>
                 <h5 class="attend-section-title"><?php echo $attendsection['attend_section_title']; ?></h5>
               <?php endif; ?>
               <?php if (!empty($attendSectionLink)) : ?>
                 <div class="attend-link-container"><a href="<?php echo $attendSectionLink['url']; ?>" target="<?php echo $attendSectionLink['target']; ?>"><?php echo $attendSectionLink['title']; ?></a></div>
               <?php endif; ?>
+              </div>
             </li>
           <?php endif; ?>
         <?php

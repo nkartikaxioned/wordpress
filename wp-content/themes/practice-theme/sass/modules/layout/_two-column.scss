@@ -1,0 +1,32 @@
+.two-by-two-section{
+    padding: 40px 0;
+    .wrapper { @include flex(); }
+    .content-container {
+     @include basis(50%);
+    }
+    figure,img {
+        width: 100%;
+        height: 100%;
+        @include basis(50%);
+    }
+    .description { margin-bottom: 20px; }
+
+    .join-heading {
+        margin-bottom: 15px;
+         @include fontSize($size: 19px, $weight: 550, $family: null) 
+        }
+
+    .join-link-container {
+            width: 20%;
+            border-radius: 20px;
+            border: 1px solid map-get($map: $colors, $key: purpleColor);
+            text-align: center;
+            background-color: map-get($map: $colors, $key: purpleColor);
+            
+            a { 
+                padding: 4px;
+                color: map-get($map: $colors, $key: whiteColor); 
+            }
+    }
+   
+}

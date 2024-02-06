@@ -1,0 +1,16 @@
+a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.wrapper { 
+    width: 72%;
+    margin: 0 auto;
+}
+
+li { list-style-type: none; }
+
+.heading { 
+    @include fontSize($size: 35px, $weight: 600, $family: null); 
+    color: map-get($map: $colors, $key: red);
+}

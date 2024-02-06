@@ -15,17 +15,24 @@
             $name = get_field('speaker_name',$id);
             $designation = get_field('speaker_designation_and_company',$id);
             $logo_image = get_field('company_logo',$id);
+            $logo_id = $logo_image['ID'];
+            $size = 'thumbnail';
+            $resized_speaker_image = wp_get_attachment_image($logo_id,$size);
           ?>
-            <?php if ($name) : ?>
+          <li>
+              <?php if ($resized_speaker_image) { ?>
+                <figure class="speaker-img"><?php echo $resized_speaker_image; ?></figure>
+              <?php } ?>
+            <div class="speaker-content">
+            <?php if ($name) { ?>
               <p><?php echo $name; ?></p>
-            <?php endif; ?>
-            <?php if ($designation) : ?>
-              <p><?php echo $designation; ?></p>
-            <?php endif; ?>
-            <?php if ($logo_image) : ?>
-              <figure><img src="<?php echo $logo_image['url']; ?>" alt="<?php echo $logo_image['alt']; ?>"></figure>
-            <?php endif; ?>
+            <?php } ?>
+            <?php if ($designation) { ?>
+              <p class="designation"><?php echo $designation; ?></p>
+            <?php } ?>
+            </div>
           <?php } ?>
+          </li>
         </ul>
       <?php endif; ?>
     </div>

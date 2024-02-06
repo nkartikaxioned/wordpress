@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => '263c6c3791a4073142dd683d6d453d943c3bff4e',
+        'name' => '__root__',
+        'dev' => true,
+    ),
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => '263c6c3791a4073142dd683d6d453d943c3bff4e',
+            'dev_requirement' => false,
+        ),
+        'php-stubs/wordpress-stubs' => array(
+            'pretty_version' => 'v6.4.1',
+            'version' => '6.4.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../php-stubs/wordpress-stubs',
+            'aliases' => array(),
+            'reference' => '6d6063cf9464a306ca2a0529705d41312b08500b',
+            'dev_requirement' => true,
+        ),
+        'php-stubs/wp-cli-stubs' => array(
+            'pretty_version' => 'v2.9.0',
+            'version' => '2.9.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../php-stubs/wp-cli-stubs',
+            'aliases' => array(),
+            'reference' => 'aa2afe94cd02f314659a3d9ef8821a3f81761c37',
+            'dev_requirement' => true,
+        ),
+    ),
+);

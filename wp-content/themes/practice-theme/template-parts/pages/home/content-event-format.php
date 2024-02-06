@@ -18,14 +18,16 @@
             <?php if ($event) : ?>
               <li>
                 <?php if ($event['event_date']) : ?>
-                  <p><?php echo $event['event_date']; ?></p>
+                  <p class="event-date"><?php echo $event['event_date']; ?></p>
                 <?php endif; ?>
-                <?php if ($event['event_image']) : ?>
-                  <figure><img class="event-image" src="<?php echo $eventImage['url']; ?>" alt="<?php echo $eventImage['alt']; ?>"></figure>
-                <?php endif; ?>
-                <?php if ($event['event_type']) : ?>
-                  <p><?php echo $event['event_type']; ?></p>
-                <?php endif; ?>
+                <div class="events-container">
+                  <?php if ($event['event_image']) : ?>
+                    <figure><img class="event-image" src="<?php echo $eventImage['url']; ?>" alt="<?php echo $eventImage['alt']; ?>"></figure>
+                  <?php endif; ?>
+                  <?php if ($event['event_type']) : ?>
+                    <span class="event-type"><?php echo $event['event_type']; ?></span>
+                  <?php endif; ?>
+                </div>
               </li>
             <?php endif; ?>
           <?php
@@ -38,12 +40,14 @@
       <?php if (get_sub_field('in_person_venue_title')) : ?>
         <p><?php echo get_sub_field('in_person_venue_title'); ?></p>
       <?php endif; ?>
-      <?php if (get_sub_field('venue_company_name')) : ?>
-        <p><?php echo get_sub_field('venue_company_name'); ?></p>
-      <?php endif; ?>
-      <?php if (get_sub_field('venue_company_adderss')) : ?>
-        <p><?php echo get_sub_field('venue_company_adderss'); ?></p>
-      <?php endif; ?>
+      <div class="venue-container">
+        <?php if (get_sub_field('venue_company_name')) : ?>
+          <p class="company-name"><?php echo get_sub_field('venue_company_name'); ?></p>
+        <?php endif; ?>
+        <?php if (get_sub_field('venue_company_adderss')) : ?>
+          <p class="company-address"><?php echo get_sub_field('venue_company_adderss'); ?></p>
+        <?php endif; ?>
+      </div>
       <?php if ($eventLink) : ?>
         <div class="event-link-container">
           <a href="<?php echo $eventLink['url']; ?>" target="<?php echo $eventLink['target']; ?>"><?php echo $eventLink['title']; ?></a>

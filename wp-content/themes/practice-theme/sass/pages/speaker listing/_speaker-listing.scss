@@ -1,0 +1,49 @@
+/* speaker listing page style */
+.all-speakers {
+    padding-top: 100px;
+
+    .check-box { 
+        @include flex(); 
+
+        li { 
+            @include flex();
+            @include basis(30%); 
+        }
+    }
+
+    .button,.clear-button { 
+        padding: 5px 10px;
+        background-color: map-get($map: $colors, $key: greenColor);
+        color: map-get($map: $colors, $key: blackColor);
+    }
+
+    .button-container{ margin-left: 20px; }
+
+    .speakers-list {
+        padding: 30px;
+        @include flex();
+        flex-wrap: wrap
+    }
+
+    .speaker-container {
+        border: 1px solid map-get($map: $colors, $key: greenColor);
+        margin-right: 10px;
+        margin-top: 10px;
+        @include basis(30%); 
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .company-logo {
+        width: 100px;
+    }
+
+    .load-more-container { text-align: center; }
+    
+    button { 
+        padding: 4px; 
+        margin-bottom: 10px;
+        background-color: map-get($map: $colors, $key: greenColor);
+    }
+}

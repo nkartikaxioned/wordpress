@@ -1,0 +1,20 @@
+.cards-section {
+    padding: 30px 0;
+    .cards-list { 
+        width: 100%;
+        @include flex(); 
+    }
+
+    li {
+        padding: 10px;
+        &:not(:last-child){ margin-right: 10px; }
+        @include basis(20%);
+        background-color: map-get($map: $colors, $key: skinColor);
+
+        figure,img {
+            height: 30px;
+            width: 30px;
+        }
+    }
+    .number { @include fontSize($size: 35px, $weight: 600, $family: null) }
+}

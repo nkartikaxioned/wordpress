@@ -1,0 +1,44 @@
+.banner-section {
+    width: 100%;
+    height: 100vh;
+    @include position($position:relative, $z-index:null, $top:null, $right:null, $bottom:null, $left:null);
+
+    .wrapper{ 
+        height: 100%; 
+        @include flex();
+    }
+
+    figure{
+        width: 100%;
+        height: 100%;
+        @include position($position:absolute, $z-index:-1, $top:0, $right:null, $bottom:null, $left:0);
+    }
+
+    .banner-image{ @include image($width:100%,$height:100%,$objFit:cover); }
+
+    .sustainable-container { 
+        @include basis(35%); 
+        margin-top: 15%;
+    }
+
+    .banner-main-heading { 
+        height: 50%;
+        @include basis(55%); 
+        padding: 80px 60px;
+        margin-right: 20px;
+        margin-top: 15%;
+        border: 4px solid #f51414;
+        justify-content: center;
+        @include fontSize($size: 45px, $weight: 600, $family: null); 
+    }
+
+    .sustaining-planet-heading { @include fontSize($size: 25px, $weight: 600, $family: null); }
+
+    .sustaining-planet-heading,
+    .banner-main-heading,p,
+    .read-more-link-container a { color: map-get($map: $colors, $key: whiteColor); }
+    .time-location { 
+        padding-bottom: 20px;
+        border-bottom: 1px solid #fff; 
+    }
+}

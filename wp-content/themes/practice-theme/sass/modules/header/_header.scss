@@ -1,0 +1,28 @@
+header {
+    width: 100%;
+    @include position($position:fixed, $z-index:1, $top:0, $right:null, $bottom:null, $left:0);
+    background-color: map-get($map: $colors, $key: greyBackground);
+ .wrapper {
+    @include flex();
+    .logo-image {
+        @include image($width:80px,$height:40px,$objFit:cover);
+    }
+ }
+
+ nav {
+
+    @include basis(91%);
+
+    ul {
+        @include flex();
+        @include justify(center);
+
+        li {
+            padding: 10px 2%;
+
+            a { color: map-get($map: $colors, $key: whiteColor); }
+        }
+    }
+    
+ }
+}

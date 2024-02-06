@@ -19,10 +19,10 @@ if ($cards) {
               <p><?php echo $cardText; ?></p>
             <?php endif; ?>
             <?php if ($totalNumber) : ?>
-              <span><?php echo $totalNumber; ?></span>
+              <span class="number"><?php echo $totalNumber; ?></span>
             <?php endif; ?>
             <?php if ($symbol) : ?>
-              <span><?php echo $symbol; ?></span>
+              <span class="number"><?php echo $symbol; ?></span>
             <?php endif; ?>
           </li>
         <?php } ?>

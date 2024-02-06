@@ -1,0 +1,41 @@
+$colors : (
+whiteColor:#fff,
+headerBackground:#F1F1F1,
+blackColor:#000,
+preNextDiv:#616161,
+greyBackground: #333333,
+underLine: #CCCCCC,
+lightGreyy: #F1F1F1,
+medGrey:#BBBBBB,
+medDarkGrey:#616161,
+greenColor:#4CAF50,
+skinColor:#f5f4ef,
+red:#f01313,
+purpleColor: #1f2e7a,
+lightGreenColor: #e9fcf8,
+);
+
+$devices: (
+  largeLaptop: 1440px,
+  laptop: 1280px,
+  smallLaptop: 1024px,
+  tablet: 995px,
+  ipad: 768px,
+  extralargePhone: 640px,
+  largePhone: 480px,
+  mediumPhone: 375px,
+  smallPhone:320px,
+  );
+
+$iconContent: (
+    youtube:"\f431",
+    pinterest:"\f0d2",
+    twitter:"\f081",
+    facebook:"\f09a",
+    instagram: "\f16d",
+    snapchat: "\f2ab",
+    linkedin: "\f08c",
+    leftArrrow: "\f359",
+    rightArrow: "\f35a",
+    arrowTop: "\f062",
+);
