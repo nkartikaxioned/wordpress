@@ -56,7 +56,7 @@ define( 'AUTH_SALT',        'g(s|IKrGl5PYI6g/t?#fZvYODIB*D$?isTyx=T0S|WO{G`X>,l.
 define( 'SECURE_AUTH_SALT', ';Y]`,t`c;zUX-#*zNT%s)!t?m0v,6}5a>X!M(?pG37@6{~;;uy=skXU|txvC;D02' );
 define( 'LOGGED_IN_SALT',   'fG7&hxhxI{SK_D*9zs^1VR-ga)<!a58p~PJ|=,=l4!J;-jk}:mA~]-T9mK1|;wA[' );
 define( 'NONCE_SALT',       'R4Wzq/{hhwG;WhMd@j>vFuYrWO_Q.^||:Fb,}x37/Lq^Ck(,T8L(:+a&}HKYpb2v' );
-
+define('JWT_AUTH_SECRET_KEY', '-fed.T{tWBWHU9D^nWT]X)ikDC/Knj1-%vgYdnN>ip.g--H(I#32=I1]L)b_vfg`');
 /**#@-*/
 
 /**
@@ -95,3 +95,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
 define('FS_METHOD', 'direct');
+
+define('JWT_AUTH_CORS_ENABLE', true);
+

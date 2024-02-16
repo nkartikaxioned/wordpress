@@ -29,47 +29,6 @@ function theme_setup()
 add_action('after_setup_theme', 'theme_setup');
 
 // Register Custom Post Type
-// function custom_post_type_books()
-// {
-
-//   $labels = array(
-//     'name'                  => _x('Books', 'Post Type General Name', 'text_domain'),
-//     'singular_name'         => _x('Book', 'Post Type Singular Name', 'text_domain'),
-//     'menu_name'             => __('Books', 'text_domain'),
-//     'all_items'             => __('All Books', 'text_domain'),
-//     'add_new_item'          => __('Add New Book', 'text_domain'),
-//     'add_new'               => __('Add New', 'text_domain'),
-//     'new_item'              => __('New Book', 'text_domain'),
-//     'edit_item'             => __('Edit Book', 'text_domain'),
-//     'update_item'           => __('Update Book', 'text_domain'),
-//     'view_item'             => __('View Book', 'text_domain'),
-//     'search_items'          => __('Search Books', 'text_domain'),
-//     'not_found'             => __('Not Found', 'text_domain'),
-//     'not_found_in_trash'    => __('Not found in Trash', 'text_domain'),
-//   );
-//   $args = array(
-//     'label'                 => __('Book', 'text_domain'),
-//     'description'           => __('Books custom post type', 'text_domain'),
-//     'labels'                => $labels,
-//     'supports'              => array('title', 'editor', 'thumbnail', 'categories', 'tags'),
-//     'hierarchical'          => true,
-//     'public'                => true,
-//     'show_ui'               => true,
-//     'show_in_menu'          => true,
-//     'show_in_nav_menus'     => true,
-//     'show_in_admin_bar'     => true,
-//     'menu_position'         => 5,
-//     'can_export'            => true,
-//     'has_archive'           => true,
-//     'exclude_from_search'   => false,
-//     'publicly_queryable'    => true,
-//     'capability_type'       => 'post', // Change to 'post' for standard posts
-//     'taxonomies'            => array('category', 'post_tag'), // Add support for categories and tags
-//     'rewrite'               => array('slug' => 'books'), // Specify the custom post type's slug
-//   );
-//   register_post_type('books', $args);
-// }
-// add_action('init', 'custom_post_type_books', 0);
 
 function custom_post_type_speakers()
 {
@@ -113,11 +72,11 @@ function custom_post_type_speakers()
 }
 add_action('init', 'custom_post_type_speakers', 0);
 
-function custom_post_type($plural_name,$singular_name)
+function custom_post_type($plural_name, $singular_name)
 {
 
   $labels = array(
-    'name'                  => _x($plural_name , 'Post Type General Name', 'text_domain'),
+    'name'                  => _x($plural_name, 'Post Type General Name', 'text_domain'),
     'singular_name'         => _x($singular_name, 'Post Type Singular Name', 'text_domain'),
     'menu_name'             => __($plural_name, 'text_domain'),
     'all_items'             => __('All ' . $plural_name, 'text_domain'),
@@ -154,21 +113,23 @@ function custom_post_type($plural_name,$singular_name)
   register_post_type($plural_name, $args);
 }
 
-function custom_post_bottles(){
- $plural_name = 'Bottles';
- $singular_name = 'Bottle';
- custom_post_type($plural_name,$singular_name);
+function custom_post_bottles()
+{
+  $plural_name = 'Bottles';
+  $singular_name = 'Bottle';
+  custom_post_type($plural_name, $singular_name);
 }
 
 add_action('init', 'custom_post_bottles');
 
-function custom_post_books(){
+function custom_post_books()
+{
   $plural_name = 'Books';
   $singular_name = 'Book';
-  custom_post_type($plural_name,$singular_name);
- }
- 
- add_action('init', 'custom_post_books',0);
+  custom_post_type($plural_name, $singular_name);
+}
+
+add_action('init', 'custom_post_books', 0);
 
 //function to add thumbnail to post
 add_theme_support('post-thumbnails');
@@ -198,7 +159,7 @@ function my_acf_op_init()
 
   $parent = acf_add_options_page(array(
     'menu_title'  => __('Website Settings'),
-     'redirect'    => true,
+    'redirect'    => true,
   ));
 
   // Add sub page.
@@ -221,6 +182,11 @@ function enqueue_custom_script()
   //wp_enqueue_script('jquery');
   wp_enqueue_script('custom-ajax-script', get_template_directory_uri() . '/js/custom-ajax.js', array('jquery'), null, true);
   wp_localize_script('custom-ajax-script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+  wp_enqueue_script('rest-script', get_template_directory_uri() . '/js/rest.js', null, 1.0, true);
+  wp_localize_script('rest-script', 'restObj', array(
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'restNonce' => wp_create_nonce('wp_rest')
+  ));
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_custom_script');
@@ -302,7 +268,7 @@ function get_speaker_data_callback()
 
   if (isset($taxonomies_names) && !empty($taxonomies_names)) {
     $args['tax_query'] = array(
-      'relation' => 'AND', 
+      'relation' => 'AND',
       array(
         'taxonomy' => 'category',
         'field'    => 'slug',
@@ -324,47 +290,114 @@ add_action('wp_ajax_get_speaker_data', 'get_speaker_data_callback');
 add_action('wp_ajax_nopriv_get_speaker_data', 'get_speaker_data_callback'); // For non-logged in users
 
 //add menu to customise menu in appearance
-function custom_customize_section($wp_customize) {
-    // Add a new section for header style
-    $wp_customize->add_section('custom_header_section', array(
-        'title'    => __('Header Style', 'theme-text-domain'),
-        'priority' => 30,
-    ));
+function custom_customize_section($wp_customize)
+{
+  // Add a new section for header style
+  $wp_customize->add_section('custom_header_section', array(
+    'title'    => __('Header Style', 'theme-text-domain'),
+    'priority' => 30,
+  ));
 
-    // Add a setting for heading color
-    $wp_customize->add_setting('heading_color_setting', array(
-        'default'           => '#000',
-        'sanitize_callback' => 'sanitize_hex_color',
-    ));
+  // Add a setting for heading color
+  $wp_customize->add_setting('heading_color_setting', array(
+    'default'           => '#000',
+    'sanitize_callback' => 'sanitize_hex_color',
+  ));
 
-    // Add a control for heading color
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'heading_color_control', array(
-        'label'    => __('Heading Color', 'theme-text-domain'),
-        'section'  => 'custom_header_section',
-        'settings' => 'heading_color_setting',
-    )));
+  // Add a control for heading color
+  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'heading_color_control', array(
+    'label'    => __('Heading Color', 'theme-text-domain'),
+    'section'  => 'custom_header_section',
+    'settings' => 'heading_color_setting',
+  )));
 
-    // Add a new section for footer style
-    $wp_customize->add_section('custom_footer_section', array(
-        'title'    => __('Footer Style', 'theme-text-domain'),
-        'priority' => 31, // Adjust the priority to place it after the header section
-    ));
+  // Add a new section for footer style
+  $wp_customize->add_section('custom_footer_section', array(
+    'title'    => __('Footer Style', 'theme-text-domain'),
+    'priority' => 31, // Adjust the priority to place it after the header section
+  ));
 
-    // Add a setting for footer color
-    $wp_customize->add_setting('footer_color_setting', array(
-        'default'           => '#000',
-        'sanitize_callback' => 'sanitize_hex_color',
-    ));
+  // Add a setting for footer color
+  $wp_customize->add_setting('footer_color_setting', array(
+    'default'           => '#000',
+    'sanitize_callback' => 'sanitize_hex_color',
+  ));
 
-    // Add a control for footer color
-    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'footer_color_control', array(
-        'label'    => __('Footer Color', 'theme-text-domain'),
-        'section'  => 'custom_footer_section',
-        'settings' => 'footer_color_setting',
-    )));
+  // Add a control for footer color
+  $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'footer_color_control', array(
+    'label'    => __('Footer Color', 'theme-text-domain'),
+    'section'  => 'custom_footer_section',
+    'settings' => 'footer_color_setting',
+  )));
 }
 
 add_action('customize_register', 'custom_customize_section');
+
+//function to make featured image in post required
+add_action('save_post', 'wpds_check_thumbnail');
+add_action('admin_notices', 'wpds_thumbnail_error');
+
+function wpds_check_thumbnail($post_id)
+{
+  if ('trash' != get_post_status($post_id)) {
+    if (get_post_type($post_id) != 'speakers')
+      return;
+
+    if (!has_post_thumbnail($post_id)) {
+      // set a transient to show the users an admin message
+      set_transient("has_post_thumbnail", "no");
+      // unhook this function so it doesn't loop infinitely
+      remove_action('save_post', 'wpds_check_thumbnail');
+      wp_update_post(array('ID' => $post_id, 'post_status' => 'draft'));
+      add_action('save_post', 'wpds_check_thumbnail');
+    } else {
+      delete_transient("has_post_thumbnail");
+    }
+  }
+}
+
+function wpds_thumbnail_error()
+{
+  // check if the transient is set, and display the error message
+  if (get_transient("has_post_thumbnail") == "no") {
+    echo '<div class="notice notice-error is-dismissible">';
+    echo '<p><strong> Error: You must set a featured image before publishing this </strong></p>';
+    echo '</div>';
+    delete_transient("has_post_thumbnail");
+  }
+}
+
+/////
+function custom_register_user_route()
+{
+  register_rest_route('cur/v1', '/register/', array(
+    'methods'  => 'POST',
+    'callback' => 'custom_handle_registration',
+    'permission_callback' => '__return_true'
+  ));
+}
+
+function custom_handle_registration()
+{
+  $username = 'maxpayne3';
+  $email = 'max3@email.com';
+  $password = 'Pass@123#word';
+  $role = 'subscriber';
+
+  $user_id = wp_create_user($username, $password, $email);
+
+  if (is_wp_error($user_id)) {
+    return new WP_Error('registration_failed', $user_id->get_error_message(), array('status' => 400));
+  }
+
+  $user = new WP_User($user_id);
+  $user->set_role($role);
+
+  return array('message' => 'Registration successful!', 'user_id' => $user_id, 'user_role' => $role);
+}
+
+add_action('rest_api_init', 'custom_register_user_route');
+////
 
 // function get_speaker_callback()
 // {
@@ -471,3 +504,6 @@ add_filter('wp_nav_menu', 'customize_menu_output', 10, 2);
 // }
 
 // add_action('init', 'remove_wysiwyg_editor');
+
+// var_dump(curl_version());
+?>
