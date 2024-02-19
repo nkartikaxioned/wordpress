@@ -367,7 +367,7 @@ function wpds_thumbnail_error()
   }
 }
 
-/////
+// function to register custom route 
 function custom_register_user_route()
 {
   register_rest_route('cur/v1', '/register/', array(
@@ -375,8 +375,14 @@ function custom_register_user_route()
     'callback' => 'custom_handle_registration',
     'permission_callback' => '__return_true'
   ));
+
+  register_rest_route('cur/v1', '/speakers/(?P<id>\d+)', array(
+    'methods' => 'GET',
+    'callback'=> 'cur_speaker',
+  ));
 }
 
+//function to create user using rest api
 function custom_handle_registration()
 {
   $username = 'maxpayne3';
@@ -397,7 +403,25 @@ function custom_handle_registration()
 }
 
 add_action('rest_api_init', 'custom_register_user_route');
-////
+
+function cur_speaker($request){
+  var_dump($request);
+  $post_id = $request['id'];
+  $post = get_post($post_id);
+  $updated_name = "dzfdfdsf";
+  
+  $post_update = array(
+    'ID'         => $post->ID,
+    'post_title' => $updated_name,
+  );
+
+  wp_update_post( $post_update );
+
+  update_field('speaker_name',$updated_name,$post->ID);
+  // update_post_meta($post->ID, "speaker_name", $updated_name);
+
+  return "post updated";
+}
 
 // function get_speaker_callback()
 // {

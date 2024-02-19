@@ -111,3 +111,17 @@ console.log(restObj.restNonce);
     alert('Update canceled.');
   }
 }
+
+jQuery(document).ready(function($) {
+  var id = 732;
+  $.ajax({
+    url: `http://localhost/kartik/wordpressfolder/wordpress/wp-json/cur/v1/speakers/${id}`,
+    type: 'GET',
+    headers: {
+      "X-WP-Nonce": restObj.restNonce
+    },
+      success: function(response) {
+          console.log(response);
+      },
+  });
+});
