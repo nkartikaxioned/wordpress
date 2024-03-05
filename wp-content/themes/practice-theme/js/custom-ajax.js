@@ -1,7 +1,7 @@
 jQuery(document).ready(function ($) {
   var postsPerPage = 3; // Number of posts per load
   var currentSpeakerCount = 6;
-  
+
   // Function to load more posts
   function loadMorePosts() {
     $.ajax({
@@ -16,11 +16,11 @@ jQuery(document).ready(function ($) {
         // Check if there are more posts
         if (response.trim() === '') {
           $('#load-more-button').hide();
-         } 
+        }
         else if ($(response).find('.speaker-container').length < postsPerPage) {
           console.log("elseif=========>");
           $('#load-more-button').hide();
-        } 
+        }
         else {
           currentSpeakerCount = $('.speaker-container').length;
         }
@@ -35,7 +35,7 @@ jQuery(document).ready(function ($) {
 
     if (totalPosts > postsPerPage) {
       $('#show-less-button').show();
-      } else {
+    } else {
       $('#show-less-button').hide();
     }
   }
@@ -51,71 +51,67 @@ jQuery(document).ready(function ($) {
   $('#load-more-button').on('click', function () {
     loadMorePosts();
   });
-  
+
 
   $('.filter').on('click', function () {
     const checkboxes = document.querySelectorAll('input[name="list[]"]:checked');
     const checkedValues = Array.from(checkboxes).map(checkbox => checkbox.value);
     $.ajax({
+      url: ajax_object.ajax_url,
+      type: 'post',
+      data: {
+        action: 'get_speaker_data',
+        speaker_names: checkedValues,
+      },
+      success: function (response) {
+        $('.speakers-list').empty();
+        $('.speakers-list').html(response);
+        $('#load-more-button').show();
+        currentSpeakerCount = $('.speaker-container').length;
+
+        toggleButton();
+      }
+    });
+  });
+
+  // Reload the page
+  $('.clear-button').on('click', function () {
+    location.reload();
+  });
+
+  $('.search-btn').on('click',function(){
+    var searchValue = $('.search-value').val();
+
+    if(searchValue) {
+      $.ajax({
         url: ajax_object.ajax_url,
         type: 'post',
         data: {
-            action: 'get_speaker_data',
-            speaker_names: checkedValues,
+          action: 'get_search_data',
+          search_val: searchValue,
         },
         success: function (response) {
-          $('.speakers-list').empty();
-          $('.speakers-list').html(response);
-          $('#load-more-button').show();
-          currentSpeakerCount = $('.speaker-container').length;
-          
-          toggleButton();
+          console.log(response);
+          $('.quick-add').html(response);
         }
-    });
+      })
+    }
   });
 
-  // $('.search').on('click',function(){
-  //     const name = document.querySelector('.speakers-name').value;
-  //     $.ajax({
-  //       url: ajax_object.ajax_url,
-  //       type: 'post',
-  //       data: {
-  //         action: 'get_speaker',
-  //         speaker_name: name,
-  //       },
-  //       success: function (response) {
-  //         $('.speakers-list').empty();
-  //         $('.speakers-list').html(response);
-  //       }
-  //     })
+  // function searchContent(val) {
+  //   content = val;
+  //   $.ajax({
+  //     url: ajax_object.ajax_url,
+  //     type: 'post',
+  //     data: {
+  //       action: 'get_search_data',
+  //       search_val: content,
+  //     },
+  //     success: function (response) {
+  //       console.log(response);
+  //       $('.quick-add').html(response);
+  //     }
   //   });
+  // }
+});
 
-    // Reload the page
-    $('.clear-button').on('click', function() {
-      location.reload();
-    });
-  });
-    
-    // jQuery(document).ready(function ($) {
-    //   $('.search').on('click',function(){
-    //     const name = document.querySelector('.speakers-name').value;
-    //     // console.log(name);
-      
-    //     if(name){
-    //     $.ajax({
-    //       url: ajax_object.ajax_url,
-    //       type: 'post',
-    //       data: {
-    //         action: 'get_speaker',
-    //         speaker_name: name,
-    //       },
-    //       success: function (response) {
-    //         $('.speakers-list').append(response);
-    //           //console.log(response);
-    //       }
-    //    })
-    //   }else {
-    //     console.log("Empty Field");
-    //   }
-    //   });
-    // });

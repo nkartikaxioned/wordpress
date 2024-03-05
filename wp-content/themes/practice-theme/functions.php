@@ -1,19 +1,25 @@
 <?php
 
-// This function enqueues the Normalize.css for use. The first parameter is a name for the stylesheet, the second is the URL. Here we
-// use an online version of the css file.
-function add_normalize_CSS()
+// This function enqueues stylesheet and script
+function enqueue_style_and_script_CSS()
 {
-  wp_enqueue_style('normalize-styles', "https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
-  wp_enqueue_style('theme-style', get_stylesheet_uri(), array(), filemtime(get_stylesheet_directory() . '/css/style.css'));
-  wp_enqueue_style('font-awesome', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
+  // wp_enqueue_style('normalize-styles', "https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
+  wp_enqueue_style('theme-style', get_stylesheet_uri());
+  wp_enqueue_style('main-style', get_stylesheet_directory_uri() . '/css/style.css', array());
+  wp_enqueue_style('font-awesome', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css", array(), null);
   // wp_enqueue_style( 'theme-style', get_template_directory_uri() . '/css/style.css', array(), filemtime(get_template_directory() . '/css/style.css'));
-}
 
-add_action('wp_enqueue_scripts', 'add_normalize_CSS');
+  wp_enqueue_script('custom-ajax-script', get_template_directory_uri() . '/js/custom-ajax.js', array('jquery'), null, true);
+  wp_localize_script('custom-ajax-script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+  wp_enqueue_script('rest-script', get_template_directory_uri() . '/js/rest.js', null, 1.0, true);
+  wp_localize_script('rest-script', 'restObj', array(
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'restNonce' => wp_create_nonce('wp_rest')
+  ));
+}
+add_action('wp_enqueue_scripts', 'enqueue_style_and_script_CSS');
 
 //functions.php registering header nav as Header Menu
-
 function theme_setup()
 {
   // Register 'header-menu' as a theme location
@@ -29,7 +35,6 @@ function theme_setup()
 add_action('after_setup_theme', 'theme_setup');
 
 // Register Custom Post Type
-
 function custom_post_type_speakers()
 {
 
@@ -39,7 +44,7 @@ function custom_post_type_speakers()
     'menu_name'             => __('speakers', 'text_domain'),
     'all_items'             => __('All speakers', 'text_domain'),
     'add_new_item'          => __('Add New speaker', 'text_domain'),
-    'add_new'               => __('Add New', 'text_domain'),
+    'add_new'               => __('Add New speaker', 'text_domain'),
     'new_item'              => __('New speaker', 'text_domain'),
     'edit_item'             => __('Edit speaker', 'text_domain'),
     'update_item'           => __('Update speaker', 'text_domain'),
@@ -176,21 +181,6 @@ function my_acf_op_init()
   ));
 }
 
-
-function enqueue_custom_script()
-{
-  //wp_enqueue_script('jquery');
-  wp_enqueue_script('custom-ajax-script', get_template_directory_uri() . '/js/custom-ajax.js', array('jquery'), null, true);
-  wp_localize_script('custom-ajax-script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
-  wp_enqueue_script('rest-script', get_template_directory_uri() . '/js/rest.js', null, 1.0, true);
-  wp_localize_script('rest-script', 'restObj', array(
-    'ajax_url' => admin_url('admin-ajax.php'),
-    'restNonce' => wp_create_nonce('wp_rest')
-  ));
-}
-
-add_action('wp_enqueue_scripts', 'enqueue_custom_script');
-
 function print_data($query)
 {
   ob_start(); // Start output buffering
@@ -227,7 +217,7 @@ function print_data($query)
           <?php } ?>
         </a>
       </article>
-<?php
+    <?php
     }
   }
 
@@ -289,8 +279,57 @@ function get_speaker_data_callback()
 add_action('wp_ajax_get_speaker_data', 'get_speaker_data_callback');
 add_action('wp_ajax_nopriv_get_speaker_data', 'get_speaker_data_callback'); // For non-logged in users
 
+function searchData($query)
+{
+  ob_start();
+
+  if ($query->have_posts()) {
+    while ($query->have_posts()) {
+      $query->the_post();
+      $postId = get_the_ID();
+      $postTitle = get_the_title();
+      $permalink = get_permalink($postId); ?>
+      <div>
+        <a href="<?php echo $permalink; ?>">
+        <span class="block"><?php echo $postTitle; ?></span>
+        </a>
+      </div>
+<?php }
+  } else {
+    echo '<p>No matching results found.</p>';
+  }
+
+  $output = ob_get_clean();
+  return $output;
+}
+
+function get_search_data_callback()
+{
+  $searchValue = $_POST['search_val'];
+  if ($searchValue) {
+    $args = array(
+      'post_type' => 'any',
+      'posts_per_page' => -1,
+      's' => $searchValue,
+    );
+  }
+
+  $query = new WP_Query($args);
+  //var_dump($query);
+  if ($query) {
+    echo searchData($query);
+    wp_reset_postdata();
+  }
+  wp_die();
+}
+
+add_action('wp_ajax_get_search_data', 'get_search_data_callback');
+add_action('wp_ajax_nopriv_get_search_data', 'get_search_data_callback');
+
+
 //add menu to customise menu in appearance
-function custom_customize_section($wp_customize)
+if(! function_exists('custom_customize_section')){
+  function custom_customize_section($wp_customize)
 {
   // Add a new section for header style
   $wp_customize->add_section('custom_header_section', array(
@@ -332,40 +371,41 @@ function custom_customize_section($wp_customize)
 }
 
 add_action('customize_register', 'custom_customize_section');
+}
 
 //function to make featured image in post required
-add_action('save_post', 'wpds_check_thumbnail');
-add_action('admin_notices', 'wpds_thumbnail_error');
+// add_action('save_post', 'wpds_check_thumbnail');
+// add_action('admin_notices', 'wpds_thumbnail_error');
 
-function wpds_check_thumbnail($post_id)
-{
-  if ('trash' != get_post_status($post_id)) {
-    if (get_post_type($post_id) != 'speakers')
-      return;
+// function wpds_check_thumbnail($post_id)
+// {
+//   if ('trash' != get_post_status($post_id)) {
+//     if (get_post_type($post_id) != 'speakers')
+//       return;
 
-    if (!has_post_thumbnail($post_id)) {
-      // set a transient to show the users an admin message
-      set_transient("has_post_thumbnail", "no");
-      // unhook this function so it doesn't loop infinitely
-      remove_action('save_post', 'wpds_check_thumbnail');
-      wp_update_post(array('ID' => $post_id, 'post_status' => 'draft'));
-      add_action('save_post', 'wpds_check_thumbnail');
-    } else {
-      delete_transient("has_post_thumbnail");
-    }
-  }
-}
+//     if (!has_post_thumbnail($post_id)) {
+//       // set a transient to show the users an admin message
+//       set_transient("has_post_thumbnail", "no");
+//       // unhook this function so it doesn't loop infinitely
+//       remove_action('save_post', 'wpds_check_thumbnail');
+//       wp_update_post(array('ID' => $post_id, 'post_status' => 'draft'));
+//       add_action('save_post', 'wpds_check_thumbnail');
+//     } else {
+//       delete_transient("has_post_thumbnail");
+//     }
+//   }
+// }
 
-function wpds_thumbnail_error()
-{
-  // check if the transient is set, and display the error message
-  if (get_transient("has_post_thumbnail") == "no") {
-    echo '<div class="notice notice-error is-dismissible">';
-    echo '<p><strong> Error: You must set a featured image before publishing this </strong></p>';
-    echo '</div>';
-    delete_transient("has_post_thumbnail");
-  }
-}
+// function wpds_thumbnail_error()
+// {
+//   // check if the transient is set, and display the error message
+//   if (get_transient("has_post_thumbnail") == "no") {
+//     echo '<div class="notice notice-error is-dismissible">';
+//     echo '<p><strong> Error: You must set a featured image before publishing this </strong></p>';
+//     echo '</div>';
+//     delete_transient("has_post_thumbnail");
+//   }
+// }
 
 // function to register custom route 
 function custom_register_user_route()
@@ -373,12 +413,11 @@ function custom_register_user_route()
   register_rest_route('cur/v1', '/register/', array(
     'methods'  => 'POST',
     'callback' => 'custom_handle_registration',
-    'permission_callback' => '__return_true'
   ));
 
   register_rest_route('cur/v1', '/speakers/(?P<id>\d+)', array(
     'methods' => 'GET',
-    'callback'=> 'cur_speaker',
+    'callback' => 'cur_speaker',
   ));
 }
 
@@ -404,24 +443,27 @@ function custom_handle_registration()
 
 add_action('rest_api_init', 'custom_register_user_route');
 
-function cur_speaker($request){
+function cur_speaker($request)
+{
   var_dump($request);
   $post_id = $request['id'];
   $post = get_post($post_id);
   $updated_name = "dzfdfdsf";
-  
+
   $post_update = array(
     'ID'         => $post->ID,
     'post_title' => $updated_name,
   );
 
-  wp_update_post( $post_update );
+  wp_update_post($post_update);
 
-  update_field('speaker_name',$updated_name,$post->ID);
+  update_field('speaker_name', $updated_name, $post->ID);
   // update_post_meta($post->ID, "speaker_name", $updated_name);
 
   return "post updated";
 }
+
+add_theme_support('html5', array('search-form'));
 
 // function get_speaker_callback()
 // {

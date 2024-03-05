@@ -5,9 +5,9 @@ Template Name: Speaker Listing Template
 get_header();
 
 ?>
-<section>
+<section class="pt-14">
     <div class="wrapper">
-        <h2><?php echo get_the_title(); ?></h2>
+        <h2 class="text-3xl font-bold"><?php echo get_the_title(); ?></h2>
     </div>
 </section>
 

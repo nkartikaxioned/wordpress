@@ -1,5 +1,5 @@
 <?php 
-$footer_background_color = get_theme_mod('footer_color_setting','#000'); 
+$footer_background_color = get_theme_mod('footer_color_setting','#f74df7'); 
 $footer_style = 'style="background-color:' . esc_attr($footer_background_color) . ';"';
 ?>
 <footer <?php echo $footer_style; ?>>
