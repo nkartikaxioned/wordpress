@@ -32,7 +32,7 @@
       </div>
     </li>
   </ul>
-  <div class="speakers-list flex flex-wrap gap-5 justify-center">
+  <div class="speakers-list flex flex-wrap justify-center ">
     <?php
     $args = array(
       'post_type' => 'speakers',
@@ -54,11 +54,11 @@
         $resizedLogoImage = wp_get_attachment_image($logoImage, $logoSize);
         $resized_thumbnail = wp_get_attachment_image(get_post_thumbnail_id($post_id), $size);
     ?>
-        <article class="speaker-container min-w-[250px] basis-[32%] border-[1px] border-solid">
+        <article class="speaker-container basis-[32%] border-[1px] border-solid max-lg:basis-[48%] max-md:basis-[75%] mr-[10px]">
           <a href="<?php echo $permalink; ?>">
             <?php
             if ($resized_thumbnail) { ?>
-              <figure class="speaker-image w-full min-h-[200px]"><?php echo $resized_thumbnail; ?></figure>
+              <figure class="speaker-image w-full aspect-video"><?php echo $resized_thumbnail; ?></figure>
             <?php }
             if ($resizedLogoImage) { ?>
               <figure class="company-logo w-[30px] h-[30px]"><?php echo $resizedLogoImage; ?></figure>
@@ -87,4 +87,29 @@
 <div class="group border-solid border-2 border-custom-red hover:bg-custom-pastal">
   <h3 class="group-hover:text-green-400">styling based on parent/group</h3>
   <p class="group-hover:text-green-400">practical on group selector where we will be discovering styling based on parent</p>
+</div>
+<div class="flex items-stretch bg-gray-200 h-20 my-2">
+  <div class="flex-1 bg-teal-400 p-2 m-2">1</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2">2</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2">3</div>
+</div>
+<div class="flex items-start bg-gray-200 h-20 my-2">
+  <div class="flex-1 bg-teal-400 p-2 m-2">1</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2">2</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2">3</div>
+</div>
+<div class="flex items-center bg-gray-200 h-20 my-2">
+  <div class="flex-1 bg-teal-400 p-2 m-2">1</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2">2</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2">3</div>
+</div>
+<div class="flex items-end bg-gray-200 h-20 my-2">
+  <div class="flex-1 bg-teal-400 p-2 m-2">1</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2">2</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2">3</div>
+</div>
+<div class="flex items-baseline bg-gray-200 h-20 my-2">
+  <div class="flex-1 bg-teal-400 p-2 m-2">1</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2 text-2xl">2</div>
+  <div class="flex-1 bg-teal-400 p-2 m-2">3</div>
 </div>

@@ -1,18 +1,12 @@
 <?php
 
-/*
-* Plugin Name: Course Taxonomy
-* Description: A short example showing how to add a taxonomy called Course.
-* Version: 1.0
-* Author: developer.wordpress.org
-* Author URI: https://codex.wordpress.org/User:Aternus
-*/
+//enqueue scripts ans stylesheets
+function scripts_and_style_enqueue(){
+wp_enqueue_script('hamburger-script',get_stylesheet_directory_uri() . '/js/hamburger.js',array(),null, 0.1,true);
+}
 
-/**
- * Register a custom post type called "book".
- *
- * @see get_post_type_labels() for label keys.
- */
+add_action('init','scripts_and_style_enqueue');
+
 function custom_post($post_singular_name, $post_plural_name, $capability_type)
 {
   $labels = array(

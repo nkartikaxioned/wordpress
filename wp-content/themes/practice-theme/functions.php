@@ -524,7 +524,7 @@ add_theme_support('html5', array('search-form'));
 function customize_menu_output($nav_menu, $args)
 {
   if ($args->theme_location == 'header-menu') {
-    $nav_menu = preg_replace('/<div/', '<nav', $nav_menu);
+    $nav_menu = preg_replace('/<div/', '<nav class="navbar"', $nav_menu);
     $nav_menu = preg_replace('/<\/div>/', '</nav>', $nav_menu);
   }
 

@@ -39,16 +39,16 @@ module.exports = {
 
     plugin(function({addComponents}){   //adding component
       addComponents({
-        '.btn': {
-          padding: '8px 20px',
-          backgroundColor: '#273444', 
-          borderRadius: '9999px', 
-          color: '#ffffff', 
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderColor: '#273444',
-          transition: '0.5s',
-        },  
+        // '.btn': {
+        //   padding: '8px 20px',
+        //   backgroundColor: '#273444', 
+        //   borderRadius: '9999px', 
+        //   color: '#ffffff', 
+        //   borderWidth: '1px',
+        //   borderStyle: 'solid',
+        //   borderColor: '#273444',
+        //   transition: '0.5s',
+        // },  
         // '.btn:hover':{
         //   backgroundcolor: '#fff',
         //   color: '#1f2e7a',
